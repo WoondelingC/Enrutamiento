@@ -4,7 +4,7 @@ import '../styles/personajes.css';
 
 const Heroes = () => {
 
-    const [personaje, setPersonaje] = useState([]);
+    const [heroes, setPersonaje] = useState([]);
 
     useEffect(() => {
         obtenerPersonaje();
@@ -19,14 +19,14 @@ const Heroes = () => {
         setPersonaje(results);
     }
 
-    console.log(personaje);
+    console.log(heroes);
 
     return (
         <div>
             <h1>Heroes</h1>
             <hr />
             {
-                personaje.map(per => (
+                heroes.map(per => (
 
                     <div className="card bg-dark text-white" key={per.id}>
                         <img className="card-img-top" src={per.image} alt="" />
