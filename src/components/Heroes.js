@@ -1,17 +1,45 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
+import '../styles/personajes.css';
 
 const Heroes = () => {
+
+    const [personaje, setPersonaje] = useState([]);
+
+    useEffect(() => {
+        obtenerPersonaje();
+    }, [])
+
+    const obtenerPersonaje = async () => {
+        const url = 'https://raw.githubusercontent.com/jennymontoya1001/endpointheroesjson/main/heroes.json';
+        const res = await fetch(url);
+        const data = await res.json();
+        const { results } = data;
+        //console.log(results);
+        setPersonaje(results);
+    }
+
+    console.log(personaje);
+
     return (
-        <div className="mt-5 p-5">
-            <h1>Hola soy Heroes</h1>
-            <div className="card w-25">
-                <img src="..." className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
-            </div>
-            </div>
+        <div>
+            <h1>Heroes</h1>
+            <hr />
+            {
+                personaje.map(per => (
+
+                    <div className="card bg-dark text-white" key={per.id}>
+                        <img className="card-img-top" src={per.image} alt="" />
+                        <div className="card-body">
+                            <h5 className="card-title text-center">{per.name}</h5>
+                            <p className="card-text">{per.superhero}</p>
+                            <p className="card-text">{per.publisher}</p>
+                            <p className="card-text">{per.alter_ego}</p>
+                            <a href="/" className="btn btn-primary d-flex justify-content-center">... Más</a>
+                        </div>
+                    </div>
+                ))
+            }
         </div>
     )
 }
