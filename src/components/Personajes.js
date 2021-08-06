@@ -1,33 +1,29 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import "../styles/personajes.css";
+import '../styles/personaje.css';
 
-const Personajes = async () => {
-    
+export const Personajes = () => {
+
     const [personaje, setPersonaje] = useState([]);
 
     useEffect(() => {
-        obtenerPersonajes();
+        obtenerPersonaje();
     }, [])
 
-    const obtenerPersonajes = async () =>{
-        const url = 'https://rickandmortyapi.com/api/character/'
-
+    const obtenerPersonaje = async () => {
+        const url = 'https://raw.githubusercontent.com/jennymontoya1001/endpointheroesjson/main/heroes.json';
         const res = await fetch(url);
-        console.log(res);
         const data = await res.json();
-        console.log(data);
-        const {results} = data;
-        console.log(results);
-        setPersonaje (results);
+        const { results } = data;
+        //console.log(results);
+        setPersonaje(results);
     }
 
     console.log(personaje);
-    
-    
+
     return (
         <div>
-            <h1>Personajes Rick and Morty</h1>
+            <h1>Heroes</h1>
             <hr />
             {
                 personaje.map(per => (
@@ -36,7 +32,9 @@ const Personajes = async () => {
                         <img className="card-img-top" src={per.image} alt="" />
                         <div className="card-body">
                             <h5 className="card-title">{per.name}</h5>
-                            <p className="card-text">{per.species}</p>
+                            <p className="card-text">{per.superhero}</p>
+                            <p className="card-text">{per.publisher}</p>
+                            <p className="card-text">{per.alter_ego}</p>
                             <a href="/" className="btn btn-primary">...Más</a>
                         </div>
                     </div>
@@ -44,7 +42,4 @@ const Personajes = async () => {
             }
         </div>
     )
-    
 }
-
-export default Personajes
