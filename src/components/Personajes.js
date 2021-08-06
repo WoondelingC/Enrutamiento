@@ -11,7 +11,7 @@ const Personajes = async () => {
     }, [])
 
     const obtenerPersonajes = async () =>{
-        const url = 'https://rickandmortyapi.com/api/character/'
+        const url = 'https://raw.githubusercontent.com/jennymontoya1001/endpointheroesjson/main/heroes.json'
 
         const res = await fetch(url);
         console.log(res);
